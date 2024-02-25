@@ -24,5 +24,20 @@ const deposit = () => {
     }
 };
 
+const getNumberOfLines =() => {
+    while (true) {
+        const lines = prompt("Enter the number of lines to bet on: ")
+        const numberOfLines = parseFloat(lines);
+        // default returned as strong, we need to convert to number
+        // Convert to floating point (like parseInt for intergers)
+        if(isNaN(numberOfLines) || numberOfLines <= 0 || numberOfLines > 3) {
+            console.log("Invalid number of lines, try again.");
+        } else {
+            return numberOfLines;
+        }
+    }
+};
+
 const depositAmount = deposit();
+const numberOfLines = getNumberOfLines();
 console.log(depositAmount);
