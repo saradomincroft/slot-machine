@@ -74,7 +74,7 @@ const getBet = (balance, lines) => {
     }
 }
 
-// 4. Spin slot machine
+// 4.1 Spin slot machine
 const spin = () => {
     // how many symbols we have
     // even though empty, still a const, can manipulate whats inside, without changing ref to array
@@ -103,7 +103,7 @@ const spin = () => {
     return reels;
 };
 
-// 5. Check if user won
+// 4.2 Transpose slot machine
 const transpose = (reels) => {
     const rows = [];
 
@@ -116,6 +116,7 @@ const transpose = (reels) => {
     return rows;
 }
 
+// 5. Check if user won
 const printRows = (rows) => {
     for(const row of rows) {
         let rowString = "";
@@ -128,6 +129,30 @@ const printRows = (rows) => {
         console.log(rowString);
     }
 };
+
+// 6. Give user winnings/ take their loss
+const getWinnings = (rows, bet, lines) => {
+    let winnings = 0;
+
+    for (let row = 0; row < lines; row ++) {
+        const symbols = rows[row];
+        let allSame = true;
+
+        for (const symbol of symbols) {
+            // loop through symbol, if all same as first 
+            // if not break out of for loop
+            if (symbol != symbols[0]) {
+                allSame = false;
+                break;
+            }
+        }
+        if (allSame) {
+            winnings += bet * SYMBOL_VALUES[symbols[0]]
+        }
+    }
+    return winnings;
+};
+
 // starting balance based on deposit amount, will change based on their amount win/ lose
 // let so can adjust variable
 let balance = deposit();
@@ -136,3 +161,5 @@ const bet = getBet(balance, numberOfLines);
 const reels = spin();
 const rows = transpose(reels);
 printRows(rows);
+const winnings = getWinnings(rows, bet, numberOfLines);
+console.log("You won, $" + winnings.toString());
