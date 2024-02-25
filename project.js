@@ -7,6 +7,27 @@
 // 7. Play again
 
 const prompt = require("prompt-sync")();
+// definine rows, columns, symbols
+// declaring these as global variables, declare globals at top - easy to see
+// all imports at top, then globals, then functions
+// typical to make global consts in all caps
+const ROWS = 3;
+const COLS = 3;
+// snake case convention for all caps
+const SYMBOLS_COUNT = {
+    "A": 2,
+    "B": 4,
+    "C": 6,
+    "D": 8,
+}
+
+const SYMBOL_VALUES = {
+    "A": 5,
+    "B": 4,
+    "C": 3,
+    "D": 2,
+}
+
 
 // 1. Deposit some money
 const deposit = () => {
